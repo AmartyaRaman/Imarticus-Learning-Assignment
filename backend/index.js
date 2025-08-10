@@ -16,15 +16,24 @@ app.use(express.json())
 // api to get all courses
 app.use('/api/courses', router)
 
-app.use(express.static(path.join(__dirname, "/frontend/dist")))
-
-app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "frontend", "dist", "index.html"))
-})
+// Only serve static files when NOT on Vercel (local development)
+if (!process.env.VERCEL) {
+    app.use(express.static(path.join(__dirname, "/frontend/dist")))
+    
+    app.get("*", (req, res) => {
+        res.sendFile(path.join(__dirname, "frontend", "dist", "index.html"))
+    })
+}
 
 // For Vercel serverless deployment
 export default app;
 
-connectToDB().then(() => {
-    app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-});
+// For local development (when not on Vercel)
+if (!process.env.VERCEL) {
+    connectToDB().then(() => {
+        app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+    });
+} else {
+    // Connect to DB in Vercel production but don't start server
+    connectToDB();
+}
