@@ -30,7 +30,7 @@ export default function CourseCard() {
               <div>{courseDetails[0]?.title || "Loading..."}</div>
               </h4>
               <p className="text-muted small mb-0">
-              <div>{courseDetails[0]?.batch_id || "Loading..."}</div>
+                {courseDetails[0]?.batch_id || "Loading..."}
               </p>
             </div>
             <div className="align-self-end">
