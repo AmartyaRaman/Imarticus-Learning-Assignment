@@ -16,14 +16,13 @@ app.use(express.json())
 // api to get all courses
 app.use('/api/courses', router)
 
-// Only serve static files when NOT on Vercel (local development)
-if (!process.env.VERCEL) {
-    app.use(express.static(path.join(__dirname, "/frontend/dist")))
-    
-    app.get("*", (req, res) => {
-        res.sendFile(path.join(__dirname, "frontend", "dist", "index.html"))
-    })
-}
+// Serve static files from frontend/dist
+app.use(express.static(path.join(__dirname, "/frontend/dist")))
+
+// SPA fallback - serve index.html for all non-API routes
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "frontend", "dist", "index.html"))
+})
 
 // For Vercel serverless deployment
 export default app;
