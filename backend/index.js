@@ -25,9 +25,6 @@ app.get("*", (req, res) => {
 // For Vercel serverless deployment
 export default app;
 
-// For local development
-if (process.env.NODE_ENV !== 'production') {
-    connectToDB().then(() => {
-        app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-    });
-}
+connectToDB().then(() => {
+    app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+});
