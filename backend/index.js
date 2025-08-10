@@ -13,26 +13,19 @@ const __dirname = path.resolve();
 
 app.use(express.json())
 
-// api to get all courses
 app.use('/api/courses', router)
 
-// Serve static files from frontend/dist
 app.use(express.static(path.join(__dirname, "/frontend/dist")))
 
-// SPA fallback - serve index.html for all non-API routes
 app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "frontend", "dist", "index.html"))
 })
 
-// For Vercel serverless deployment
 export default app;
-
-// For local development (when not on Vercel)
 if (!process.env.VERCEL) {
     connectToDB().then(() => {
         app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
     });
 } else {
-    // Connect to DB in Vercel production but don't start server
     connectToDB();
 }
