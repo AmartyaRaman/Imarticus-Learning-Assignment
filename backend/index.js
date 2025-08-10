@@ -15,17 +15,7 @@ app.use(express.json())
 
 app.use('/api/courses', router)
 
-app.use(express.static(path.join(__dirname, "/frontend/dist")))
+connectToDB().then(() => {
+    app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+});
 
-app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "frontend", "dist", "index.html"))
-})
-
-export default app;
-if (!process.env.VERCEL) {
-    connectToDB().then(() => {
-        app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-    });
-} else {
-    connectToDB();
-}
