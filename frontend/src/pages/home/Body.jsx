@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
 const Body = () => {
   return (
@@ -91,17 +92,19 @@ const Body = () => {
           {/* CTA Buttons */}
           <div className="row justify-content-center g-3">
             <div className="col-12 col-sm-6 col-lg-4">
-              <button 
-                className="btn btn-lg w-100 text-white fw-bold"
-                style={{ 
-                  backgroundColor: '#FF6B35',
-                  borderColor: '#FF6B35',
-                  borderRadius: '12px',
-                  padding: '12px 24px'
-                }}
-              >
-                Apply Now
-              </button>
+              <Link to="/course">
+                <button 
+                  className="btn btn-lg w-100 text-white fw-bold"
+                  style={{ 
+                    backgroundColor: '#FF6B35',
+                    borderColor: '#FF6B35',
+                    borderRadius: '12px',
+                    padding: '12px 24px'
+                  }}
+                  >
+                  Apply Now
+                </button>
+              </Link>
             </div>
             <div className="col-12 col-sm-6 col-lg-4">
               <button 
