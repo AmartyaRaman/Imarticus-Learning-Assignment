@@ -5,7 +5,9 @@ import cors from 'cors';
 import router from './routes/course.route.js';
 import connectToDB from './dbConnection.js';
 
+// Configure dotenv to look for .env file in backend directory
 dotenv.config();
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -25,4 +27,3 @@ app.get("*", (req, res) => {
 connectToDB().then(() => {
     app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 });
-
