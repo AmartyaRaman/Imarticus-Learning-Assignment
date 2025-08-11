@@ -37,7 +37,12 @@ const courseSchema = new mongoose.Schema({
     required: true,
     unique: true
   },
-
+  document: {
+    type: String,
+    required: false,
+    default: null,
+    description: 'URL to the course document stored on Puter cloud'
+  },
   modules: [moduleSchema],
 }, {
   timestamps: true
