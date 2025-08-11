@@ -11,6 +11,7 @@ const PORT = process.env.PORT || 3000;
 
 const __dirname = path.resolve();
 
+app.use(cors())
 app.use(express.json())
 
 app.use('/api/courses', router)

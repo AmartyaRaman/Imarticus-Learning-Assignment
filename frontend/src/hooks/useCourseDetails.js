@@ -8,7 +8,7 @@ const useCourseDetails = () => {
       const getResponse = async () => {
         setLoading(true);
         try {
-          const res = await fetch("/api/courses");
+          const res = await fetch(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/courses`);
           const data = await res.json();
           if (data.error) throw new Error(data.error)
           
